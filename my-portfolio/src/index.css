@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom Terminal Colors */
+  --color-terminal-bg: #0d0d0d;
+  --color-terminal-accent: #ff6b00;
+  --color-terminal-border: #1a1a1a;
+  --color-terminal-secondary: #4d4d4d;
+
+  /* Custom Font */
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Base styling and background effects */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-terminal-bg text-white font-mono antialiased;
+    /* Custom terminal cursor for free movement */
+    cursor: crosshair;
+    
+    /* Enhanced Grid Background */
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(255, 107, 0, 0.05) 0%, transparent 70%),
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Custom selection color (Orange highlights) */
+  ::selection {
+    @apply bg-terminal-accent/30 text-terminal-accent;
+  }
+
+  /* Dark Terminal Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-terminal-bg;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-terminal-border rounded-full hover:bg-terminal-secondary transition-colors;
+  }
+}
+
+/* 3D and Terminal Utilities */
+@layer utilities {
+  /* Fix: Scanline Overlay for authentic terminal look */
+  .crt-overlay {
+    @apply fixed inset-0 pointer-events-none z-50 opacity-[0.03];
+    background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%, 
+      rgba(0, 0, 0, 0.5) 50%
+    );
+    background-size: 100% 4px;
+  }
+
+  /* 3D Perspective for the Skills Sphere */
+  .perspective-1000 {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  /* Glow effects for terminal elements */
+  .terminal-glow {
+    text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+  }
+  
+  .terminal-flicker {
+    animation: flicker 0.15s infinite;
+  }
+
+  @keyframes flicker {
+    0% { opacity: 0.97; }
+    100% { opacity: 1; }
+  }
+}
