@@ -67,7 +67,7 @@ const Contact = () => {
                   <span className="text-gray-500 text-xs">// Enter your message</span>
                   <textarea 
                     placeholder="Type your message here..." 
-                    rows="3"
+                    rows={3}
                     className="bg-transparent border-b border-[#1a1a1a] focus:border-[#ff6b00] outline-none py-1 text-white placeholder:text-[#2d2d2d] w-full resize-none"
                   ></textarea>
                 </div>

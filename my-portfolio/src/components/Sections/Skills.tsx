@@ -1,6 +1,7 @@
 import React, { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
+import * as THREE from 'three'; // Import THREE for types
 
 const skills = [
   { name: "React", slug: "react" },
@@ -29,8 +30,8 @@ const skills = [
   { name: "Jest", slug: "jest" },
 ];
 
-function getSpherePositions(radius, count) {
-  const positions = [];
+function getSpherePositions(radius: number, count: number) {
+  const positions: [number, number, number][] = [];
   for (let i = 0; i < count; i++) {
     const phi = Math.acos(-1 + (2 * i) / count);
     const theta = Math.sqrt(count * Math.PI) * phi;
@@ -44,10 +45,13 @@ function getSpherePositions(radius, count) {
 }
 
 function WireSphere() {
-  const mesh = useRef();
+  // FIXED: Added type and initial value to useRef
+  const mesh = useRef<THREE.Group>(null!);
 
   useFrame(() => {
-    mesh.current.rotation.y += 0.0005;
+    if (mesh.current) {
+      mesh.current.rotation.y += 0.0005;
+    }
   });
 
   return (
@@ -62,7 +66,7 @@ function WireSphere() {
           opacity={0.35}
         />
       </mesh>
-      {/* Invisible solid sphere to trigger occlusion (hiding icons behind it) */}
+      {/* Invisible solid sphere to trigger occlusion */}
       <mesh>
         <icosahedronGeometry args={[3.1, 2]} />
         <meshBasicMaterial visible={false} />
@@ -72,12 +76,14 @@ function WireSphere() {
 }
 
 function Icons() {
-  const group = useRef();
-  // Using useMemo to prevent recalculating positions on every render
+  // FIXED: Added type and initial value to useRef
+  const group = useRef<THREE.Group>(null!);
   const positions = useMemo(() => getSpherePositions(4.5, skills.length), []);
 
   useFrame(() => {
-    group.current.rotation.y += 0.0005;
+    if (group.current) {
+      group.current.rotation.y += 0.0005;
+    }
   });
 
   return (
@@ -88,7 +94,7 @@ function Icons() {
           position={positions[i]}
           center
           distanceFactor={10}
-          occlude // Enables hiding behind the sphere geometry
+          occlude="blending" // Enhanced occlusion logic
         >
           <div className="flex flex-col items-center select-none pointer-events-none">
             <img
@@ -106,7 +112,7 @@ function Icons() {
 
 const Skills = () => {
   return (
-    <section className="h-screen w-full flex items-center justify-center">
+    <section className="h-screen w-full flex items-center justify-center bg-[#0d0d0d]">
       <Canvas camera={{ position: [0, 0, 10], fov: 60 }}>
         <ambientLight intensity={0.6} />
         <pointLight position={[10, 10, 10]} color="#ff6b00" />

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Window from '@/components/Terminal/Window';
-import BootBar from '@/components/Terminal/BootBar';
-import CommandText from '@/components/Terminal/CommandText';
 import { Github, ExternalLink, Terminal } from 'lucide-react';
+import CommandText from '../Terminal/CommandText';
+import BootBar from '../Terminal/BootBar';
+import Window from '../Terminal/Window';
 
 const Hero = () => {
   const [isBooting, setIsBooting] = useState(false);
@@ -50,7 +50,7 @@ const Hero = () => {
             
             {/* Typing effect for specific roles */}
             <div className="space-y-2 min-h-[60px]">
-              <CommandText 
+              <CommandText
                 text="<Architect /> Engineering Beyond Boundaries." 
                 className="text-terminal-accent text-lg font-mono"
                 delay={0.8}
