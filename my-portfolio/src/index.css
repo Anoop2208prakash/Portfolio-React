@@ -19,10 +19,10 @@
 
   body {
     @apply bg-terminal-bg text-white font-mono antialiased;
-    /* Custom terminal cursor for free movement */
+    /* Crosshair matches the technical "hacker" aesthetic */
     cursor: crosshair;
     
-    /* Enhanced Grid Background */
+    /* Enhanced Grid Background with Center Glow */
     background-image: 
       radial-gradient(circle at 50% 50%, rgba(255, 107, 0, 0.05) 0%, transparent 70%),
       linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
@@ -62,10 +62,22 @@
     background-size: 100% 4px;
   }
 
-  /* 3D Perspective for the Skills Sphere */
+  /* 3D Perspective for non-Three.js elements */
   .perspective-1000 {
     perspective: 1000px;
     transform-style: preserve-3d;
+  }
+
+  /* CRITICAL: Disables text selection during Right-Click rotation */
+  .select-none-all {
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Change cursor to 'move' when interacting with the 3D Sphere */
+  .cursor-grab:active {
+    cursor: grabbing;
   }
 
   /* Glow effects for terminal elements */
@@ -80,5 +92,11 @@
   @keyframes flicker {
     0% { opacity: 0.97; }
     100% { opacity: 1; }
+  }
+
+  /* Support for Three.js Canvas layering */
+  .canvas-container {
+    @apply relative w-full h-full outline-none;
+    touch-action: none; /* Prevents scrolling on mobile while rotating sphere */
   }
 }
