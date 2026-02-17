@@ -33,7 +33,10 @@ const Hero = () => {
         
         {/* Left Side: Text Content */}
         <div className="space-y-8">
-          <motion.div variants={itemVariants} className="inline-block px-3 py-1 border border-terminal-accent/30 bg-terminal-accent/10 rounded text-terminal-accent text-xs font-mono uppercase tracking-widest">
+          <motion.div 
+            variants={itemVariants} 
+            className="inline-block px-3 py-1 border border-terminal-accent/30 bg-terminal-accent/10 rounded text-terminal-accent text-xs font-mono uppercase tracking-widest"
+          >
             <span className="animate-pulse mr-2">●</span> SYSTEM.KERNEL :: v2.5.0 ONLINE
           </motion.div>
           
@@ -45,7 +48,7 @@ const Hero = () => {
               </span>
             </h1>
             
-            {/* Typing effect for your specific roles */}
+            {/* Typing effect for specific roles */}
             <div className="space-y-2 min-h-[60px]">
               <CommandText 
                 text="<Architect /> Engineering Beyond Boundaries." 
